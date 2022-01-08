@@ -4,4 +4,4 @@ import { Player } from "./src/Player";
 const gameScreen = document.querySelector(".game-screen");
 const game = new Game(gameScreen);
 game.start();
-Player.instantiate({ position: new Position(250, 400, 0) });
+Player.instantiate({ position: new Position(250, 450, 0) });

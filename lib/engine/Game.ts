@@ -30,6 +30,8 @@ export class Game {
 
         .game-engine-play-area * {
             position: absolute;
+            width: fit-content;
+            height: fit-content;
             top: 0;
             left: 0;
             right: 0;

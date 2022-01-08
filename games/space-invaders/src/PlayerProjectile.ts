@@ -7,7 +7,7 @@ import { getCurrentFrame } from "../../../lib/engine/Game";
 @Name("player-projectile")
 export class PlayerProjectile extends Entity {
 
-    speed: number = 250;
+    speed: number = 400;
     timeToLive: number = 300;
 
     start(): void {
@@ -25,9 +25,9 @@ export class PlayerProjectile extends Entity {
         return css`
       :host {
         display: block;
-        width: 4px;
-        height: 10px;
-        background: blue;
+        width: 4px !important;
+        height: 10px !important;
+        background: #20ff20;
       }
     `;
     }

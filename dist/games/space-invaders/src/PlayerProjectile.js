@@ -7,7 +7,7 @@ import { getCurrentFrame } from "../../../lib/engine/Game";
 let PlayerProjectile = class PlayerProjectile extends Entity {
     constructor() {
         super(...arguments);
-        this.speed = 250;
+        this.speed = 400;
         this.timeToLive = 300;
     }
     start() {
@@ -23,9 +23,9 @@ let PlayerProjectile = class PlayerProjectile extends Entity {
         return css `
       :host {
         display: block;
-        width: 4px;
-        height: 10px;
-        background: blue;
+        width: 4px !important;
+        height: 10px !important;
+        background: #20ff20;
       }
     `;
     }

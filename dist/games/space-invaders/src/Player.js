@@ -20,12 +20,6 @@ let Player = Player_1 = class Player extends Entity {
         this.handleMovement(deltaTime);
     }
     handleMovement(deltaTime) {
-        if (isKeyDown(Arrow.DOWN)) {
-            this.position.add(Position.down.multiply(deltaTime * this.speed));
-        }
-        if (isKeyDown(Arrow.UP)) {
-            this.position.add(Position.up.multiply(deltaTime * this.speed));
-        }
         if (isKeyDown(Arrow.LEFT)) {
             this.position.add(Position.left.multiply(deltaTime * this.speed));
         }
@@ -33,19 +27,38 @@ let Player = Player_1 = class Player extends Entity {
             this.position.add(Position.right.multiply(deltaTime * this.speed));
         }
         if (isKeyPress(" ")) {
-            PlayerProjectile.instantiate({ position: this.position.copy().add(new Position(10, 0, 0)) });
+            PlayerProjectile.instantiate({
+                position: this.position.copy().add(new Position(17.5, 0, 0)),
+            });
         }
     }
     render() {
-        return html ``;
+        return html `
+      <div class="gun"></div>
+      <div class="hull"></div>
+    `;
     }
     static get styles() {
         return css `
       :host {
         display: block;
-        width: 20px;
+      }
+
+      :host * {
+        background: #20ff20;
+      }
+
+      .hull {
+        width: 40px;
         height: 20px;
-        background: green;
+        border-radius: 7px 7px 0 0;
+      }
+
+      .gun {
+        width: 10px;
+        height: 10px;
+        transform: translate(15px, 0);
+        border-radius: 4px 4px 0 0;
       }
     `;
     }
