@@ -18,7 +18,7 @@ export function isKeyDown(key: string) {
 
 export function isKeyPress(key: string) {
     const keyDownEvent = getKeyDown(key);
-    return keyDownEvent && keyDownEvent.pressFrame === getCurrentFrame();
+    return keyDownEvent && keyDownEvent.pressFrame === getCurrentFrame() - 1;
 }
 
 export function getKeyDown(key: string) {

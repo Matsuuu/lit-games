@@ -77,7 +77,6 @@ export class Game {
         const entityInPool = this.entityPool.get(ent.entityId);
         if (!entityInPool)
             return;
-        entityInPool.remove();
         this.entityPool.delete(ent.entityId);
     }
     calculateFps() {

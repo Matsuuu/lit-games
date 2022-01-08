@@ -1,9 +1,14 @@
 import { LitElement } from "lit";
-import { addEntity, getGameContext } from "../Game";
+import { addEntity, getGameContext, removeEntity } from "../Game";
 import { Position } from "./Position";
+
+export interface InstantiationOptions {
+    position?: Position;
+}
 
 export abstract class Entity extends LitElement {
 
+    public static _entityTagName: string | undefined;
     public position: Position = Position.zeroed;
 
     public frameAdded: number = 0;
@@ -14,8 +19,15 @@ export abstract class Entity extends LitElement {
     abstract tick(deltaTime: number): void;
 
     static get entityTagName(): string {
-        console.error("Entity tag name not defined for ", this);
-        throw new Error("Define static getter 'entityTagName' to entity");
+        if (!this._entityTagName) {
+            console.error("Entity tag name not defined for ", this);
+            throw new Error("Define static getter 'entityTagName' to entity\n\nstatic get entityTagName()\n\n");
+        }
+        return this._entityTagName;
+    }
+
+    static set entityTagName(tagName: string) {
+        this._entityTagName = tagName;
     }
 
     get entityTagName(): string {
@@ -54,10 +66,11 @@ export abstract class Entity extends LitElement {
     }
 
     remove() {
-        this.remove();
+        removeEntity(this);
+        super.remove();
     }
 
-    static instantiate() {
+    static instantiate(opts?: InstantiationOptions) {
 
         const staticInstance = this;
         if (!customElements.get(this.entityTagName)) {
@@ -65,8 +78,11 @@ export abstract class Entity extends LitElement {
         }
 
         const context = getGameContext();
-        const thisElem = document.createElement(this.entityTagName) as any;
+        const thisElem = document.createElement(this.entityTagName) as any; // TODO
         thisElem.__staticInstance = staticInstance;
+        if (opts?.position) {
+            thisElem.position = opts.position;
+        }
         context?.appendChild(thisElem);
     }
 }

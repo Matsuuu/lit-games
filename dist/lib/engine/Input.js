@@ -9,7 +9,7 @@ export function isKeyDown(key) {
 }
 export function isKeyPress(key) {
     const keyDownEvent = getKeyDown(key);
-    return keyDownEvent && keyDownEvent.pressFrame === getCurrentFrame();
+    return keyDownEvent && keyDownEvent.pressFrame === getCurrentFrame() - 1;
 }
 export function getKeyDown(key) {
     return KEYS_DOWN.find((k) => k.key === key);

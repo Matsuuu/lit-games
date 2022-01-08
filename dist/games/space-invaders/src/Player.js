@@ -1,16 +1,19 @@
+var Player_1;
+import { __decorate } from "tslib";
 import { css, html } from "lit";
+import { Name } from "../../../lib/engine/decorators/EntityDecorator";
 import { Entity } from "../../../lib/engine/entity/Entity";
 import { Position } from "../../../lib/engine/entity/Position";
-import { Arrow, isKeyDown } from "../../../lib/engine/Input";
-export class Player extends Entity {
+import { Arrow, isKeyDown, isKeyPress } from "../../../lib/engine/Input";
+import { PlayerProjectile } from "./PlayerProjectile";
+let Player = Player_1 = class Player extends Entity {
     constructor() {
         super(...arguments);
         this.speed = 200;
     }
-    static get entityTagName() {
-        return "player-one";
-    }
     start() {
+        // @ts-ignore
+        console.log(Player_1.foobarbaz);
         console.log("Player created");
     }
     tick(deltaTime) {
@@ -18,16 +21,19 @@ export class Player extends Entity {
     }
     handleMovement(deltaTime) {
         if (isKeyDown(Arrow.DOWN)) {
-            this.position.add(new Position(0, 1, 0, deltaTime * this.speed));
+            this.position.add(Position.down.multiply(deltaTime * this.speed));
         }
         if (isKeyDown(Arrow.UP)) {
-            this.position.add(new Position(0, -1, 0, deltaTime * this.speed));
+            this.position.add(Position.up.multiply(deltaTime * this.speed));
         }
         if (isKeyDown(Arrow.LEFT)) {
-            this.position.add(new Position(-1, 0, 0, deltaTime * this.speed));
+            this.position.add(Position.left.multiply(deltaTime * this.speed));
         }
         if (isKeyDown(Arrow.RIGHT)) {
-            this.position.add(new Position(1, 0, 0, deltaTime * this.speed));
+            this.position.add(Position.right.multiply(deltaTime * this.speed));
+        }
+        if (isKeyPress(" ")) {
+            PlayerProjectile.instantiate({ position: this.position.copy().add(new Position(10, 0, 0)) });
         }
     }
     render() {
@@ -43,4 +49,8 @@ export class Player extends Entity {
       }
     `;
     }
-}
+};
+Player = Player_1 = __decorate([
+    Name("player-one")
+], Player);
+export { Player };
