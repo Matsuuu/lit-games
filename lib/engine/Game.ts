@@ -19,10 +19,16 @@ export class Game {
 
     constructor(context?: GameContext) {
         this.context = context || document.body;
+        this.context.classList.add("game-engine-play-area");
         Game._instance = this;
         const styles = document.createElement("style");
         styles.innerHTML = `
-        body * {
+        .game-engine-play-area {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-engine-play-area * {
             position: absolute;
             top: 0;
             left: 0;

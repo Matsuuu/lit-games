@@ -13,6 +13,7 @@ export class Player extends Entity {
 
     start() {
         console.log("Player created");
+
     }
 
     tick(deltaTime: number) {

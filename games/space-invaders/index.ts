@@ -1,7 +1,8 @@
 import { Game } from "../../lib/engine/Game";
 import { Player } from "./src/Player";
 
-const game = new Game();
+const gameScreen = document.querySelector(".game-screen") as HTMLElement;
+const game = new Game(gameScreen);
 game.start();
 
 
