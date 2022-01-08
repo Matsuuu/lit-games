@@ -56,12 +56,14 @@ export class Invader extends Entity {
       width: 15px;
       height: 4px;
       transform: rotateZ(30deg);
+      animation: mouth-animation-left 1000ms infinite;
     }
 
     .mouth-right {
       width: 15px;
       height: 4px;
       transform: rotateZ(-30deg);
+      animation: mouth-animation-right 1000ms infinite;
     }
 
     .mouth {
@@ -76,6 +78,7 @@ export class Invader extends Entity {
       position: absolute;
       top: 4px;
       left: -4px;
+      animation: arm-animation-left 1000ms infinite;
     }
 
     .arm-right {
@@ -85,6 +88,7 @@ export class Invader extends Entity {
       position: absolute;
       top: 4px;
       right: -4px;
+      animation: arm-animation-right 1000ms infinite;
     }
 
     .antenna-left {
@@ -103,6 +107,53 @@ export class Invader extends Entity {
       right: 4px;
       position: absolute;
       top: -12px;
+    }
+
+    @keyframes arm-animation-left {
+      0% {
+        transform: rotateZ(30deg);
+      }
+      50% {
+        transform: rotateZ(90deg);
+      }
+      100% {
+        transform: rotateZ(30deg);
+      }
+    }
+
+    @keyframes arm-animation-right {
+      0% {
+        transform: rotateZ(-30deg);
+      }
+      50% {
+        transform: rotateZ(-90deg);
+      }
+      100% {
+        transform: rotateZ(-30deg);
+      }
+    }
+
+    @keyframes mouth-animation-left {
+      0% {
+        transform: rotateZ(30deg);
+      }
+      50% {
+        transform: rotateZ(90deg);
+      }
+      100% {
+        transform: rotateZ(30deg);
+      }
+    }
+    @keyframes mouth-animation-right {
+      0% {
+        transform: rotateZ(-30deg);
+      }
+      50% {
+        transform: rotateZ(-90deg);
+      }
+      100% {
+        transform: rotateZ(-30deg);
+      }
     }
   `;
 }
