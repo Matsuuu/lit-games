@@ -1,0 +1,29 @@
+{
+  "name": "lit-games",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"web-dev-server\" \"tsc --watch\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matsuuu/lit-games.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matsuuu/lit-games/issues"
+  },
+  "homepage": "https://github.com/Matsuuu/lit-games#readme",
+  "dependencies": {
+    "lit": "^2.1.1"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.29",
+    "concurrently": "^7.0.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4"
+  }
+}
