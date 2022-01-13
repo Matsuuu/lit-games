@@ -1,12 +1,26 @@
 import { css, html } from "lit";
 import { Name } from "../../../lib/engine/decorators/EntityDecorator";
 import { Entity } from "../../../lib/engine/entity/Entity";
+import { Position } from "../../../lib/engine/entity/Position";
 
 @Name("space-invader")
 export class Invader extends Entity {
+    speed = 100;
+    turnAroundTime = 6000 / this.speed; // Frames. Calculation with speed to allow modification
+    timeSinceTurnAround = 0;
+    approachSpeed = 20;
+
     start(): void { }
 
-    tick(deltaTime: number): void { }
+    tick(deltaTime: number): void {
+        this.timeSinceTurnAround += 1;
+        this.position.add(Position.right.multiply(deltaTime * this.speed));
+        if (this.timeSinceTurnAround > this.turnAroundTime) {
+            this.speed = this.speed * -1;
+            this.timeSinceTurnAround = 0;
+            this.position.add(Position.down.multiply(this.approachSpeed));
+        }
+    }
 
     render() {
         return html`
@@ -28,6 +42,7 @@ export class Invader extends Entity {
     static styles = css`
     :host {
       position: relative;
+      transition: 100ms linear;
     }
 
     :host * {
