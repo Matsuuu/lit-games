@@ -1,19 +1,24 @@
 import { css, html } from "lit";
+import { AABBCollider } from "../../../lib/engine/collision/AABBCollider";
 import { Name } from "../../../lib/engine/decorators/EntityDecorator";
 import { Entity } from "../../../lib/engine/entity/Entity";
 import { Position } from "../../../lib/engine/entity/Position";
 
 @Name("space-invader")
 export class Invader extends Entity {
-    speed = 100;
-    turnAroundTime = 6000 / this.speed; // Frames. Calculation with speed to allow modification
+    speed = 50;
+    turnAroundTime = 100 / this.speed; // Frames. Calculation with speed to allow modification
     timeSinceTurnAround = 0;
-    approachSpeed = 20;
+    approachSpeed = 10;
+    tags = ["Enemy"];
+    collider: AABBCollider | undefined;
 
-    start(): void { }
+    start(): void {
+        this.collider = new AABBCollider(this.position, 27, 27);
+    }
 
     tick(deltaTime: number): void {
-        this.timeSinceTurnAround += 1;
+        this.timeSinceTurnAround += 1 * deltaTime;
         this.position.add(Position.right.multiply(deltaTime * this.speed));
         if (this.timeSinceTurnAround > this.turnAroundTime) {
             this.speed = this.speed * -1;
@@ -42,7 +47,7 @@ export class Invader extends Entity {
     static styles = css`
     :host {
       position: relative;
-      transition: 100ms linear;
+      transition: 10ms linear;
     }
 
     :host * {
@@ -66,6 +71,8 @@ export class Invader extends Entity {
     .eye:last-child {
       transform: translate(16px, 6px);
     }
+
+    /* The styling below is brute-forcey because I don't really case about this implementation detail */
 
     .mouth-left {
       width: 15px;

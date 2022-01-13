@@ -1,19 +1,23 @@
 import { __decorate } from "tslib";
 import { css, html } from "lit";
+import { AABBCollider } from "../../../lib/engine/collision/AABBCollider";
 import { Name } from "../../../lib/engine/decorators/EntityDecorator";
 import { Entity } from "../../../lib/engine/entity/Entity";
 import { Position } from "../../../lib/engine/entity/Position";
 let Invader = class Invader extends Entity {
     constructor() {
         super(...arguments);
-        this.speed = 100;
-        this.turnAroundTime = 6000 / this.speed; // Frames. Calculation with speed to allow modification
+        this.speed = 50;
+        this.turnAroundTime = 100 / this.speed; // Frames. Calculation with speed to allow modification
         this.timeSinceTurnAround = 0;
-        this.approachSpeed = 20;
+        this.approachSpeed = 10;
+        this.tags = ["Enemy"];
     }
-    start() { }
+    start() {
+        this.collider = new AABBCollider(this.position, 27, 27);
+    }
     tick(deltaTime) {
-        this.timeSinceTurnAround += 1;
+        this.timeSinceTurnAround += 1 * deltaTime;
         this.position.add(Position.right.multiply(deltaTime * this.speed));
         if (this.timeSinceTurnAround > this.turnAroundTime) {
             this.speed = this.speed * -1;
@@ -41,7 +45,7 @@ let Invader = class Invader extends Entity {
 Invader.styles = css `
     :host {
       position: relative;
-      transition: 100ms linear;
+      transition: 10ms linear;
     }
 
     :host * {
@@ -65,6 +69,8 @@ Invader.styles = css `
     .eye:last-child {
       transform: translate(16px, 6px);
     }
+
+    /* The styling below is brute-forcey because I don't really case about this implementation detail */
 
     .mouth-left {
       width: 15px;

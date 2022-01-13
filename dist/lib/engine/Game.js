@@ -41,6 +41,7 @@ export class Game {
         this.timeStart = Date.now();
         listenForInput();
         return new Promise(async (resolve, reject) => {
+            this.gameStopper = reject;
             while (true) {
                 this.currentFrame += 1;
                 this.performGameLoop();
@@ -83,7 +84,7 @@ export class Game {
     }
     calculateFps() {
         this.fps = this.totalFrames / ((Date.now() / 1000) - (this.timeStart / 1000));
-        //console.log(this.fps);
+        console.log(this.fps);
     }
 }
 export function getCurrentFrame() {
@@ -100,4 +101,8 @@ export function removeEntity(ent) {
 }
 export function getGameContext() {
     return getGameInstance().context;
+}
+export function endGame() {
+    var _a, _b;
+    (_b = (_a = getGameInstance()) === null || _a === void 0 ? void 0 : _a.gameStopper) === null || _b === void 0 ? void 0 : _b.call(_a, "Game ended");
 }

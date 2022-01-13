@@ -13,11 +13,20 @@ export class Position {
         this.z += otherPosition.z;
         return this;
     }
-    multiply(multiplier) {
-        this.x = this.x * multiplier;
-        this.y = this.y * multiplier;
-        this.z = this.z * multiplier;
+    sub(otherPosition) {
+        this.x -= otherPosition.x;
+        this.y -= otherPosition.y;
+        this.z -= otherPosition.z;
         return this;
+    }
+    multiply(multiplier) {
+        this.x *= multiplier;
+        this.y *= multiplier;
+        this.z *= multiplier;
+        return this;
+    }
+    get squareMagnitude() {
+        return this.x * this.x + this.y * this.y;
     }
     copy() {
         return new Position(this.x, this.y, this.z);

@@ -1,6 +1,8 @@
 import { Entity } from "../../../lib/engine/entity/Entity";
 import { Position } from "../../../lib/engine/entity/Position";
+
 export class Projectile extends Entity {
+
     constructor() {
         super(...arguments);
         this.speed = 50;

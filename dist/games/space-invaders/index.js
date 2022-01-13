@@ -4,7 +4,11 @@ import { Invader } from "./src/Invader";
 import { Player } from "./src/Player";
 const gameScreen = document.querySelector(".game-screen");
 const game = new Game(gameScreen);
-game.start();
+const runningGame = game.start();
+runningGame.catch(() => {
+    alert("You lost!");
+    window.location.reload();
+});
 Player.instantiate({ position: new Position(250, 450, 0) });
 for (let i = 25; i < 400; i += 75) {
     Invader.instantiate({ position: new Position(i, 20, 0) });

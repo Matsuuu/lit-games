@@ -5,6 +5,7 @@ export class Entity extends LitElement {
     constructor() {
         super();
         this.position = Position.zeroed;
+        this.tags = [];
         this.frameAdded = 0;
         this.entityId = 0;
         addEntity(this);

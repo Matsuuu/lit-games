@@ -10,6 +10,7 @@ export abstract class Entity extends LitElement {
 
     public static _entityTagName: string | undefined;
     public position: Position = Position.zeroed;
+    public tags: string[] = [];
 
     public frameAdded: number = 0;
     public entityId: number = 0;
